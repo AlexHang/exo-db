@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-export default function ExoplanetForm({ onSubmit, initialValues = {} }) {
+export default function ExoplanetForm({ onSubmit, isSubmitting }) {
   const [formData, setFormData] = useState({
-    name: initialValues.name || '',
-    distance: initialValues.distance || '',
-    discoveryYear: initialValues.discoveryYear || '',
-    description: initialValues.description || '',
-    imageUrl: initialValues.imageUrl || ''
+    name: '',
+    distance: '',
+    discoveryYear: '',
+    description: '',
+    imageUrl: ''
   });
   
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
+  const validate = () => {
     const newErrors = {};
     
     if (!formData.name.trim()) {
@@ -20,23 +20,20 @@ export default function ExoplanetForm({ onSubmit, initialValues = {} }) {
     
     if (!formData.distance) {
       newErrors.distance = 'Distance is required';
-    } else if (isNaN(formData.distance) || formData.distance <= 0) {
+    } else if (isNaN(formData.distance) || parseFloat(formData.distance) <= 0) {
       newErrors.distance = 'Distance must be a positive number';
     }
     
     if (!formData.discoveryYear) {
       newErrors.discoveryYear = 'Discovery year is required';
-    } else if (
-      isNaN(formData.discoveryYear) || 
-      !Number.isInteger(parseFloat(formData.discoveryYear)) ||
-      formData.discoveryYear < 1900 || 
-      formData.discoveryYear > new Date().getFullYear()
-    ) {
+    } else if (!/^\d{4}$/.test(formData.discoveryYear) || 
+              parseInt(formData.discoveryYear) < 1900 || 
+              parseInt(formData.discoveryYear) > new Date().getFullYear()) {
       newErrors.discoveryYear = `Discovery year must be a valid year between 1900 and ${new Date().getFullYear()}`;
     }
     
     if (formData.imageUrl && !/^https?:\/\/.+/.test(formData.imageUrl)) {
-      newErrors.imageUrl = 'Image URL must be a valid URL';
+      newErrors.imageUrl = 'Image URL must be a valid URL starting with http:// or https://';
     }
     
     setErrors(newErrors);
@@ -45,32 +42,32 @@ export default function ExoplanetForm({ onSubmit, initialValues = {} }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
+    setFormData({
+      ...formData,
       [name]: value
-    }));
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      // Convert numeric fields to proper types
-      const submissionData = {
+    if (validate()) {
+      // Convert numeric fields
+      const submitData = {
         ...formData,
         distance: parseFloat(formData.distance),
         discoveryYear: parseInt(formData.discoveryYear)
       };
       
-      onSubmit(submissionData);
+      onSubmit(submitData);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="name" className="block mb-1 text-sm font-medium text-gray-700">
-          Name *
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          Name <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -78,30 +75,33 @@ export default function ExoplanetForm({ onSubmit, initialValues = {} }) {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className={`w-full p-2 border rounded ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+          className={`input ${errors.name ? 'border-red-500' : ''}`}
+          disabled={isSubmitting}
         />
         {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
       </div>
       
-      <div>
-        <label htmlFor="distance" className="block mb-1 text-sm font-medium text-gray-700">
-          Distance from Earth (light-years) *
+      <div className="mb-4">
+        <label htmlFor="distance" className="block text-sm font-medium text-gray-700 mb-1">
+          Distance (light-years) <span className="text-red-500">*</span>
         </label>
         <input
           type="number"
           id="distance"
           name="distance"
           step="0.01"
+          min="0"
           value={formData.distance}
           onChange={handleChange}
-          className={`w-full p-2 border rounded ${errors.distance ? 'border-red-500' : 'border-gray-300'}`}
+          className={`input ${errors.distance ? 'border-red-500' : ''}`}
+          disabled={isSubmitting}
         />
         {errors.distance && <p className="mt-1 text-sm text-red-500">{errors.distance}</p>}
       </div>
       
-      <div>
-        <label htmlFor="discoveryYear" className="block mb-1 text-sm font-medium text-gray-700">
-          Discovery Year *
+      <div className="mb-4">
+        <label htmlFor="discoveryYear" className="block text-sm font-medium text-gray-700 mb-1">
+          Discovery Year <span className="text-red-500">*</span>
         </label>
         <input
           type="number"
@@ -109,27 +109,31 @@ export default function ExoplanetForm({ onSubmit, initialValues = {} }) {
           name="discoveryYear"
           value={formData.discoveryYear}
           onChange={handleChange}
-          className={`w-full p-2 border rounded ${errors.discoveryYear ? 'border-red-500' : 'border-gray-300'}`}
+          className={`input ${errors.discoveryYear ? 'border-red-500' : ''}`}
+          min="1900"
+          max={new Date().getFullYear()}
+          disabled={isSubmitting}
         />
         {errors.discoveryYear && <p className="mt-1 text-sm text-red-500">{errors.discoveryYear}</p>}
       </div>
       
-      <div>
-        <label htmlFor="description" className="block mb-1 text-sm font-medium text-gray-700">
+      <div className="mb-4">
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
           Description
         </label>
         <textarea
           id="description"
           name="description"
-          rows="4"
           value={formData.description}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-        ></textarea>
+          rows="4"
+          className="input"
+          disabled={isSubmitting}
+        />
       </div>
       
-      <div>
-        <label htmlFor="imageUrl" className="block mb-1 text-sm font-medium text-gray-700">
+      <div className="mb-6">
+        <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
           Image URL
         </label>
         <input
@@ -138,19 +142,19 @@ export default function ExoplanetForm({ onSubmit, initialValues = {} }) {
           name="imageUrl"
           value={formData.imageUrl}
           onChange={handleChange}
-          className={`w-full p-2 border rounded ${errors.imageUrl ? 'border-red-500' : 'border-gray-300'}`}
+          className={`input ${errors.imageUrl ? 'border-red-500' : ''}`}
+          disabled={isSubmitting}
         />
         {errors.imageUrl && <p className="mt-1 text-sm text-red-500">{errors.imageUrl}</p>}
       </div>
       
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-        >
-          Submit Exoplanet
-        </button>
-      </div>
+      <button
+        type="submit"
+        className="btn btn-primary w-full"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Submitting...' : 'Submit Exoplanet'}
+      </button>
     </form>
   );
 }

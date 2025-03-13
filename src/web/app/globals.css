@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded font-medium transition duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+  }
+  
+  .input {
+    @apply w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-200;
+  }
+}
+
+/* Add your global styles here */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.max-w-md {
+  max-width: 28rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.bg-red-100 {
+  background-color: #fee2e2;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-red-400 {
+  border-color: #f87171;
+}
+
+.text-red-700 {
+  color: #b91c1c;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.text-indigo-600 {
+  color: #4f46e5;
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}

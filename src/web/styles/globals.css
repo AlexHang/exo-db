@@ -1,11 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-  @apply bg-gray-100;
+    @apply bg-gray-900 text-white;
 }
 
-.container {
-  @apply px-4 mx-auto max-w-7xl;
+.card {
+    @apply p-6 m-4 max-w-sm mx-auto;
+}
+
+@media (min-width: 640px) {
+    .card {
+        @apply max-w-md;
+    }
+}
+
+@media (min-width: 768px) {
+    .card {
+        @apply max-w-lg;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card {
+        @apply max-w-xl;
+    }
 }
