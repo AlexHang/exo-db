@@ -11,6 +11,91 @@ export const swaggerConfig = {
       "description": "Development server"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Exoplanet": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "distance": {
+            "type": "number"
+          },
+          "discoveryYear": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ExoplanetInput": {
+        "type": "object",
+        "required": ["name", "distance", "discoveryYear"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "distance": {
+            "type": "number"
+          },
+          "discoveryYear": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "user-id"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
   "paths": {
     "/exoplanets": {
       "get": {
@@ -33,6 +118,11 @@ export const swaggerConfig = {
       },
       "post": {
         "summary": "Create a new exoplanet",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -85,6 +175,11 @@ export const swaggerConfig = {
       },
       "put": {
         "summary": "Update an exoplanet",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -120,6 +215,11 @@ export const swaggerConfig = {
       },
       "delete": {
         "summary": "Delete an exoplanet",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -131,7 +231,7 @@ export const swaggerConfig = {
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Exoplanet deleted successfully"
           }
         }
@@ -243,78 +343,5 @@ export const swaggerConfig = {
         }
       }
     }
-  },
-  "components": {
-    "schemas": {
-      "Exoplanet": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "distance": {
-            "type": "number"
-          },
-          "discoveryYear": {
-            "type": "integer"
-          },
-          "description": {
-            "type": "string"
-          },
-          "imageUrl": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "ExoplanetInput": {
-        "type": "object",
-        "required": ["name", "distance", "discoveryYear"],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "distance": {
-            "type": "number"
-          },
-          "discoveryYear": {
-            "type": "integer"
-          },
-          "description": {
-            "type": "string"
-          },
-          "imageUrl": {
-            "type": "string"
-          }
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "example": "user-id"
-          },
-          "name": {
-            "type": "string",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "example": "john.doe@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "password123"
-          }
-        }
-      }
-    }
   }
-}
+};
