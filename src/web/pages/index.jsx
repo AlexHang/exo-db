@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import ExoplanetList from '../components/ExoplanetList';
-import SearchBar from '../components/SearchBar';
-import Head from 'next/head';
-import { fetchExoplanets } from '../utils/api';
+import { useState, useEffect } from "react";
+import ExoplanetList from "./components/ExoplanetList";
+import SearchBar from "./components/SearchBar";
+import Head from "next/head";
+import { fetchExoplanets } from "./api/exoplanetsApi";
+import { SessionProvider } from "next-auth/react";
 
 export default function Home() {
   const [exoplanets, setExoplanets] = useState([]);
@@ -18,7 +19,7 @@ export default function Home() {
         setFilteredExoplanets(data);
         setLoading(false);
       } catch (err) {
-        setError('Failed to fetch exoplanets');
+        setError("Failed to fetch exoplanets");
         setLoading(false);
       }
     };
@@ -32,25 +33,38 @@ export default function Home() {
       return;
     }
 
-    const filtered = exoplanets.filter(planet => 
+    const filtered = exoplanets.filter((planet) =>
       planet.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredExoplanets(filtered);
   };
 
-  if (loading) return <div className="container py-8 text-center">Loading exoplanets...</div>;
-  if (error) return <div className="container py-8 text-center text-red-500">{error}</div>;
+  if (loading)
+    return (
+      <div className="container py-8 text-center">Loading exoplanets...</div>
+    );
+  if (error)
+    return (
+      <div className="container py-8 text-center text-red-500">{error}</div>
+    );
 
   return (
     <>
       <Head>
         <title>Exoplanet Explorer</title>
-        <meta name="description" content="Explore exoplanets from across the universe" />
+        <meta
+          name="description"
+          content="Explore exoplanets from across the universe"
+        />
       </Head>
       <div className="container py-8">
-        <h1 className="mb-8 text-4xl font-bold text-center">Exoplanet Explorer</h1>
-        <SearchBar onSearch={handleSearch} />
-        <ExoplanetList exoplanets={filteredExoplanets} />
+        <h1 className="mb-8 text-4xl font-bold text-center">
+          Exoplanet Explorer
+        </h1>
+        <SessionProvider>
+          <SearchBar onSearch={handleSearch} />
+          <ExoplanetList exoplanets={filteredExoplanets} />
+        </SessionProvider>
       </div>
     </>
   );

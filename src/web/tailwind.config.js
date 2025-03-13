@@ -1,18 +1,10 @@
 module.exports = {
   content: [
-    "./pages/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}"
+    './src/web/pages/**/*.{js,jsx,ts,tsx}',
+    './src/web/components/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {
-      colors: {
-        space: {
-          dark: '#0F172A',
-          light: '#334155',
-          accent: '#38BDF8'
-        }
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };
