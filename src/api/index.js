@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import { serve, setup } from 'swagger-ui-express';
 import { swaggerConfig } from './docs/swagger.js';
 import exoplanetsRouter from './routes/exoplanet-routes.js';
+import authRouter from './routes/auth-routes.js';
 
 // Connect to database
 connectDB();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(json());
 
 app.use('/api/exoplanets', exoplanetsRouter);
+app.use('/api/auth', authRouter);
 
 app.use('/api-docs', serve, setup(swaggerConfig));
 
