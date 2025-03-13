@@ -14,5 +14,5 @@ export default function ExoplanetCard({ exoplanet }) {
         </div>
       </div>
     </Link>
-  );
-}
+  )
+};

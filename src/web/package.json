@@ -1,24 +1,24 @@
 {
-    "name": "exop-db-web",
+    "name": "exoplanet-explorer-web",
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint"
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
     },
     "dependencies": {
-        "axios": "^1.3.4",
-        "next": "^13.2.4",
-        "next-auth": "^4.20.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-hook-form": "^7.43.8"
+      "axios": "^1.3.4",
+      "next": "^13.2.4",
+      "next-auth": "^4.20.1",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-hook-form": "^7.43.8"
     },
     "devDependencies": {
-        "autoprefixer": "^10.4.21",
-        "postcss": "^8.5.3",
-        "tailwindcss": "^3.4.17"
+      "autoprefixer": "^10.4.14",
+      "postcss": "^8.4.21",
+      "tailwindcss": "^3.2.7"
     }
-}
+  }

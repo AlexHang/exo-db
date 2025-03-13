@@ -1,6 +1,6 @@
 import ExoplanetCard from './ExoplanetCard';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/client';
 
 export default function ExoplanetList({ exoplanets }) {
   const { data: session } = useSession();

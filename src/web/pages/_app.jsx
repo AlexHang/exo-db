@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/client';
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
