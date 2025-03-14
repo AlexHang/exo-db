@@ -2,6 +2,7 @@
 import NavBar from '@/app/lib/components/navBar';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { apiService } from './services/api';
 
 export default function Home({ params }) {
   const router = useRouter();
@@ -10,15 +11,19 @@ export default function Home({ params }) {
   const filteredCards = planets.filter(planet => {
     console.log(planet)
     return planet?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
-  }
-  );
+  });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/exoplanets')
-      .then(response => response.json())
-      .then(data => setPlanets(data));
-  }
-    , []);
+    const fetchPlanets = async () => {
+      try {
+        const data = await apiService.getAllPlanets();
+        setPlanets(data);
+      } catch (error) {
+        console.error('Error fetching planets:', error);
+      }
+    };
+    fetchPlanets();
+  }, []);
 
   return (
     <div className="bg-gray-900 min-h-screen text-gray-100">
@@ -37,7 +42,7 @@ export default function Home({ params }) {
       <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {filteredCards.map(card => (
           <div 
-            key={card.id} 
+            key={card._id} 
             className="border rounded shadow p-4 bg-gray-800 border-gray-700 cursor-pointer hover:bg-gray-700 transition-colors"
             onClick={() => router.push(`/view/${card._id}`)}
           >

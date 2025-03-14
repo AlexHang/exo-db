@@ -1,61 +1,22 @@
-'use client'
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import NavBar from '@/app/lib/components/navBar';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { apiService } from '@/app/services/api';
 
-export default function PlanetView({ params }) {
-  const unwrappedParams = React.use(params);
-  const [planet, setPlanet] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
-  useEffect(() => {
-    const fetchPlanet = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/exoplanets/${unwrappedParams.id}`);
-        const data = await response.json();
-        setPlanet(data);
-      } catch (error) {
-        console.error('Error fetching planet:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPlanet();
-  }, [unwrappedParams.id]);
-
-  if (loading) {
-    return (
-      <>
-      <NavBar />
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white text-2xl">
-        Loading...
-      </div></>
-    );
-  }
-
-  if (!planet) {
-    return (
-      <>
-      <NavBar />
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white text-2xl">
-        Planet not found
-      </div></>
-    );
-  }
+export default async function PlanetView({ params }) {
+  const planet = await apiService.getPlanetById(params.id);
 
   return (
     <>
     <NavBar />
     <div className="min-h-screen bg-gray-900 text-white p-8">
-      <button
-        onClick={() => router.push('../')}
-        className="mb-8 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+      <Link
+        href="../"
+        className="mb-8 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors inline-block"
       >
         ← Back to Home
-      </button>
+      </Link>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
         <div className="sticky top-8">
           <Image
@@ -92,6 +53,7 @@ export default function PlanetView({ params }) {
           </div>
         </div>
       </div>
-    </div></>
+    </div>
+    </>
   );
 }
