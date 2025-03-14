@@ -1,7 +1,8 @@
-export const reactStrictMode = true;
-export const env = {
-    API_URL: process.env.API_URL || 'http://localhost:5000/api'
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    images: {
+        domains: ['upload.wikimedia.org', 'images-assets.nasa.gov'],
+      },
 };
-export const images = {
-    domains: ['images.unsplash.com', 'upload.wikimedia.org'],
-};
+
+export default nextConfig;
