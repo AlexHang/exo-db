@@ -21,7 +21,7 @@ export const apiService = {
             },
             body: JSON.stringify(planetData),
         });
-        return response.json();
+        return response;
     },
 
     // Auth

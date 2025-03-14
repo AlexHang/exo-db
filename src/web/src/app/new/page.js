@@ -2,6 +2,7 @@
 import NavBar from "../lib/components/navBar";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { apiService } from "../services/api";
 
 export default function NewEntry() {
     const router = useRouter();
@@ -19,17 +20,7 @@ export default function NewEntry() {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/exoplanets', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    ...formData,
-                    distance: Number(formData.distance),
-                    discoveryYear: Number(formData.discoveryYear)
-                }),
-            });
+            const response = await apiService.createPlanet(formData);
 
             if (response.ok) {
                 router.push('/');
