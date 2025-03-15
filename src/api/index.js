@@ -6,7 +6,6 @@ import { swaggerConfig } from './docs/swagger.js';
 import exoplanetsRouter from './routes/exoplanet-routes.js';
 import authRouter from './routes/auth-routes.js';
 
-// Connect to database
 connectDB();
 
 const app = express();

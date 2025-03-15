@@ -1,6 +1,5 @@
 import Exoplanet from '../model/exoplanet.js';
 
-// Get all planets
 export async function getPlanets(req, res) {
   try {
     const planets = await Exoplanet.find();
@@ -10,7 +9,6 @@ export async function getPlanets(req, res) {
   }
 }
 
-// Get single planet
 export async function getPlanetById(req, res) {
   try {
     const planet = await Exoplanet.findById(req.params.id);
@@ -23,7 +21,6 @@ export async function getPlanetById(req, res) {
   }
 }
 
-// Create new planet
 export async function createPlanet(req, res) {
   const { name, distance, discoveryYear, description, imageUrl } = req.body;
 
@@ -43,7 +40,6 @@ export async function createPlanet(req, res) {
   }
 }
 
-// Update planet
 export async function updatePlanet(req, res) {
   try {
     const planet = await Exoplanet.findByIdAndUpdate(
@@ -62,7 +58,6 @@ export async function updatePlanet(req, res) {
   }
 }
 
-// Delete planet
 export async function deletePlanet(req, res) {
   try {
     const planet = await Exoplanet.findByIdAndDelete(req.params.id);

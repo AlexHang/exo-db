@@ -24,7 +24,6 @@ export const apiService = {
         return response;
     },
 
-    // Auth
     login: async (credentials) => {
         const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',

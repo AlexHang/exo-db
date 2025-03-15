@@ -1,0 +1,47 @@
+[debug] [2025-03-15T12:55:28.484Z] ----------------------------------------------------------------------
+[debug] [2025-03-15T12:55:28.487Z] Command:       E:\Programs\NodeJS\node.exe C:\Users\Alex\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-03-15T12:55:28.488Z] CLI Version:   13.16.0
+[debug] [2025-03-15T12:55:28.488Z] Platform:      win32
+[debug] [2025-03-15T12:55:28.488Z] Node Version:  v22.14.0
+[debug] [2025-03-15T12:55:28.489Z] Time:          Sat Mar 15 2025 14:55:28 GMT+0200 (Eastern European Standard Time)
+[debug] [2025-03-15T12:55:28.489Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-15T12:55:28.498Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-15T12:55:28.498Z] > authorizing via signed-in user (alexandru.hang99@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\Projects\Web\interviews\Codekeeper\full-stack next\EXO-DB\exo-db\src\web
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-03-15T12:55:39.082Z] > refreshing access token with scopes: []
+[debug] [2025-03-15T12:55:39.088Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-03-15T12:55:39.089Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-15T12:55:39.449Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-03-15T12:55:39.450Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-15T12:55:39.471Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-03-15T12:55:40.430Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-03-15T12:55:40.430Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project exo-db-82845 (exo-db) 
+[info] 
+=== Hosting Setup
+[debug] [2025-03-15T12:55:43.988Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/exo-db-82845 [none]
+[debug] [2025-03-15T12:55:44.256Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/exo-db-82845 200
+[debug] [2025-03-15T12:55:44.256Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/exo-db-82845 {"projectId":"exo-db-82845","projectNumber":"544125937529","displayName":"exo-db","name":"projects/exo-db-82845","resources":{"hostingSite":"exo-db-82845"},"state":"ACTIVE","etag":"1_84305591-4de9-4cfe-8eef-d90cfd7d8a72"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

@@ -28,17 +28,15 @@ export default function Home({ params }) {
   return (
     <div className="bg-gray-900 min-h-screen text-gray-100">
       <NavBar />
-      {/* Search Bar */}
       <div className="p-4">
         <input
           type="text"
-          placeholder="Search cards..."
+          placeholder="Search planets..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full p-2 border rounded bg-gray-800 border-gray-700 text-gray-100 placeholder-gray-400"
         />
       </div>
-      {/* Cards Grid */}
       <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {filteredCards.map(card => (
           <div 
