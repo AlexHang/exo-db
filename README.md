@@ -16,7 +16,7 @@ You need to run both FE and BE servers in order to make the app run locally. The
 
 
 ## 2. Architecture:
-This project was flexible from the POV of the architecture and the technologies used, so I decided to use a classic client-server front-end architecture. The architecture for each component is as it follows:
+This project was flexible from the POV of the architecture and the technologies used, so I decided to use a classic client-server architecture. The architecture for each component is as it follows:
 
 1. Back-end
     - built on Express, with MongoDB for data persistance
